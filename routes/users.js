@@ -1,24 +1,9 @@
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '123456',
-  database :'mysql',      // 数据库名称
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Express' });
 });
 
-connection.connect();
-
-var  sql = 'SELECT * FROM websites';
-//查
-connection.query(sql,function (err, result) {
-  if(err){
-    console.log('[SELECT ERROR] - ',err.message);
-    return;
-  }
-
-  console.log('--------------------------SELECT----------------------------');
-  console.log(result);
-  console.log('------------------------------------------------------------\n\n');
-});
-
-connection.end();
+module.exports = router;
