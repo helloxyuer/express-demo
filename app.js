@@ -22,6 +22,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+var admin = express();
+admin.on('mount', function(parent) {
+    console.log(admin.mountpath);
+    console.log('Admin Mounted');
+});
+admin.get('/', function(req, res) {
+    console.log(admin.mountpath);
+    res.send('Admin Homepage');
+});
+app.use('/admin', admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
